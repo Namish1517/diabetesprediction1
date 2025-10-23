@@ -39,11 +39,12 @@ if st.button("Predict"):
         pred_rf=rf_model.predict(input_data_scaled)[0]
         pred_xgb=xgb_model.predict(input_data_scaled)[0]
         avg_pred=round((pred_log+pred_rf+pred_xgb)/3)
-        result="🟢Non-Diabetic" if avg_pred==0 else "🔴Diabetic"
+        result="🟢Low Risk" if avg_pred==0 else "🔴High Risk"
         st.success(f"Average Prediction:{result}")
         with st.expander("Show Individual Model Predictions"):
-            st.info(f"Logistic Regression:{'Non-Diabetic' if pred_log==0 else 'Diabetic'}")
-            st.info(f"Random Forest:{'Non-Diabetic' if pred_rf==0 else 'Diabetic'}")
-            st.info(f"XGBoost:{'Non-Diabetic' if pred_xgb==0 else 'Diabetic'}")
+            st.info(f"Logistic Regression:{'Low Risk' if pred_log==0 else 'High Risk'}")
+            st.info(f"Random Forest:{'Low Risk' if pred_rf==0 else 'High Risk'}")
+            st.info(f"XGBoost:{'Low Risk' if pred_xgb==0 else 'High Risk'}")
     except Exception as e:
         st.error(f"Prediction failed:{e}")
+
